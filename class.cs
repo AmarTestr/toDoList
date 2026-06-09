@@ -28,19 +28,15 @@ namespace TaskManagementSystem
             Status = TaskStatus.Pending;
 
         }
-
-
     }
-
+    
     public class TaskManager
     {
         public static List<TaskItem> tasks = new List<TaskItem>();
     }
-
+    
     public class AddTask:TaskManager
-
-    { 
-       
+    {       
         public void CreateTask()
         {
             Console.WriteLine("Enter the Task Title");
@@ -63,8 +59,6 @@ namespace TaskManagementSystem
             }
 
         }
-
-
     }
 
     public class ViewTask:TaskManager
