@@ -7,12 +7,9 @@ namespace Test
         public static void Main(string[] args)
         {
             Console.WriteLine("enter the task");
-            TaskPriority task = TaskPriority.Low;
-            //Console.WriteLine(task);
+            TaskPriority task = TaskPriority.Low;     
            while (true)
             {
-
-            
             Console.WriteLine("\n1.Add Task");
             Console.WriteLine("2.View Task");
             Console.WriteLine("3.Complete Task");
@@ -20,8 +17,7 @@ namespace Test
             Console.WriteLine("5.Exit");
             Console.WriteLine("Enter your choice");
             string choice = Console.ReadLine();
-
-
+               
                 switch (choice)
                 {
                     case "1":
@@ -29,8 +25,7 @@ namespace Test
                         AddTask Task = new AddTask();
                         Task.CreateTask();
                         break;
-
-
+                        
                     case "2":
                         Console.WriteLine("View Task");
                         ViewTask view = new ViewTask();
@@ -48,6 +43,7 @@ namespace Test
                         FilterTask filter = new FilterTask();
                         filter.Filter();
                         break;
+                        
                     case "5":
                         Console.WriteLine("Exiting");
                         return;
