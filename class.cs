@@ -45,12 +45,22 @@ namespace TaskManagementSystem
         {
             Console.WriteLine("Enter the Task Title");
             string title = Console.ReadLine();
-            Console.WriteLine("Enter the task priority Low , Medium , High");
-            TaskPriority priority = Enum.Parse<TaskPriority> (Console.ReadLine(), true);
-           
-            TaskItem task = new TaskItem(title, priority);
-            tasks.Add(task);
-            Console.WriteLine("Task created");
+
+            bool exists = tasks
+    .Any(t => t.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+            if (exists)
+                {
+                Console.WriteLine("name already exists");
+
+            }
+            else {
+                Console.WriteLine("Enter the task priority Low , Medium , High");
+                TaskPriority priority = Enum.Parse<TaskPriority>(Console.ReadLine(), true);
+
+                TaskItem task = new TaskItem(title, priority);
+                tasks.Add(task);
+                Console.WriteLine("Task created");
+            }
 
         }
 
