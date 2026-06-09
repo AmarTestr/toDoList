@@ -1,83 +1,60 @@
 ﻿using System;
-namespace TaskManagementSystem
+using TaskManagementSystem;
+namespace Test
 {
-
-    public enum TaskPriority
+    class Program
     {
-        Low, Medium, High
-    }
-
-    public enum TaskStatus
-    {
-        Pending,
-        Completed
-    }
-
-    public class TaskItem
-    {
-        public  string Title { get; set; }
-        public TaskPriority Priority { get; set; }
-        public TaskStatus Status { get; set; }
-
-        public TaskItem(string title, TaskPriority priority)
+        public static void Main(string[] args)
         {
-            Title= title;
-            Priority = priority;
-            Status = TaskStatus.Pending;
-
-        }
-
-
-    }
-    public class AddTask
-
-    { 
-        public static List<TaskItem> tasks= new List<TaskItem>();
-        public void CreateTask()
-        {
-            Console.WriteLine("Enter the Task Title");
-            string title = Console.ReadLine();
-            Console.WriteLine("Enter the task priority Low , Medium , High");
-            TaskPriority priority = Enum.Parse<TaskPriority> (Console.ReadLine(), true);
-           
-            TaskItem task = new TaskItem(title, priority);
-            tasks.Add(task);
-            Console.WriteLine("Task created");
-
-        }
-
-
-    }
-
-    public class ViewTask
-    {
-        public void ShowTasks()
-        {
-            if (AddTask.tasks.Count == 0)
+            Console.WriteLine("enter the task");
+            TaskPriority task = TaskPriority.Low;
+            //Console.WriteLine(task);
+           while (true)
             {
-                Console.WriteLine("No tasks found.");
-                return;
-            }
 
-            foreach (var task in AddTask.tasks)
-            {
-                Console.WriteLine($"Title: {task.Title}");
-                Console.WriteLine($"Priority: {task.Priority}");
-                Console.WriteLine($"Status: {task.Status}");
-                Console.WriteLine("----------------------");
+            
+            Console.WriteLine("\n1.Add Task");
+            Console.WriteLine("2.View Task");
+            Console.WriteLine("3.Complete Task");
+            Console.WriteLine("4.Filter Task");
+            Console.WriteLine("5.Exit");
+            Console.WriteLine("Enter your choice");
+            string choice = Console.ReadLine();
+
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("Add the Task");
+                        AddTask Task = new AddTask();
+                        Task.CreateTask();
+                        break;
+
+
+                    case "2":
+                        Console.WriteLine("View Task");
+                        ViewTask view = new ViewTask();
+                        view.ShowTasks();
+                        break;
+
+                    case "3":
+                        Console.WriteLine("Complete Task");
+                        CompleteTask complete = new CompleteTask();
+                        complete.Completed();
+                        break;
+
+                    case "4":
+                        Console.WriteLine("Filter Task");
+                        FilterTask filter = new FilterTask();
+                        filter.Filter();
+                        break;
+                    case "5":
+                        Console.WriteLine("Exiting");
+                        return;
+
+                }
             }
         }
     }
-
-    public class CompleteTask
-    {
-
-    }
-
-    public class FilterTask
-    {
-
-    }
-
 
 }
