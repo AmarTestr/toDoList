@@ -1,56 +1,103 @@
-﻿using System;
+﻿
+using System;
 using TaskManagementSystem;
-namespace Test
+
+class Program
 {
-    class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        TaskManager manager = new TaskManager();
+
+        while (true)
         {
-            Console.WriteLine("enter the task");
-            TaskPriority task = TaskPriority.Low;     
-           while (true)
-            {
-            Console.WriteLine("\n1.Add Task");
-            Console.WriteLine("2.View Task");
-            Console.WriteLine("3.Complete Task");
-            Console.WriteLine("4.Filter Task");
-            Console.WriteLine("5.Exit");
-            Console.WriteLine("Enter your choice");
+            Console.WriteLine("\nTask System");
+            Console.WriteLine("1. Add Work Task");
+            Console.WriteLine("2. Add Personal Task");
+            Console.WriteLine("3. View Tasks");
+            Console.WriteLine("4. Complete Task");
+            Console.WriteLine("5. Delete Task");
+            Console.WriteLine("6. Filter Tasks");
+            Console.WriteLine("7. Save file");
+            Console.WriteLine("8. Exit");
+            Console.Write("Enter choice: ");
+
             string choice = Console.ReadLine();
-               
-                switch (choice)
-                {
-                    case "1":
-                        Console.WriteLine("Add the Task");
-                        AddTask Task = new AddTask();
-                        Task.CreateTask();
-                        break;
-                        
-                    case "2":
-                        Console.WriteLine("View Task");
-                        ViewTask view = new ViewTask();
-                        view.ShowTasks();
-                        break;
 
-                    case "3":
-                        Console.WriteLine("Complete Task");
-                        CompleteTask complete = new CompleteTask();
-                        complete.Completed();
-                        break;
+            switch (choice)
+            {
+                case "1":
+                    Console.Write("Title: ");
+                    string wtitle = Console.ReadLine();
 
-                    case "4":
-                        Console.WriteLine("Filter Task");
-                        FilterTask filter = new FilterTask();
-                        filter.Filter();
-                        break;
-                        
-                    case "5":
-                        Console.WriteLine("Exiting");
-                        return;
+                    Console.Write("Priority (Low/Medium/High): ");
+                    string workinput = Console.ReadLine();
+                    if (Enum.TryParse<TaskPriority>(workinput, true, out TaskPriority wpriority) || !Enum.IsDefined(typeof(TaskPriority), wpriority))
+                    {
+                        Console.WriteLine("Valid priority: " + wpriority);
 
-                }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Outside the provided values");
+                    }
+                    Console.Write("Work Project Name: ");
+                    string project = Console.ReadLine();
+
+                    manager.AddTask(
+                        new WorkTask(wtitle, wpriority, project));
+                    break;
+
+                case "2":
+                    Console.Write("Title: ");
+                    string ptitle = Console.ReadLine();
+
+                    Console.Write("Priority (Low/Medium/High): ");
+                    string personalinput = Console.ReadLine();
+                    if (Enum.TryParse<TaskPriority>(personalinput, true, out TaskPriority ppriority) || !Enum.IsDefined(typeof(TaskPriority), ppriority))
+                    {
+                        Console.WriteLine("Valid priority: " + ppriority);
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Outside the provided values");
+                    }
+
+                    Console.Write("Personal Project Location: ");
+                    string location = Console.ReadLine();
+
+                    manager.AddTask(
+                        new PersonalTask(ptitle, ppriority, location));
+                    break;
+
+                case "3":
+                    manager.ViewTasks();
+                    break;
+
+                case "4":
+                    Console.Write("Enter title: ");
+                    manager.CompleteTask(Console.ReadLine());
+                    break;
+
+                case "5":
+                    Console.Write("Enter title: ");
+                    manager.DeleteTask(Console.ReadLine());
+                    break;
+
+                case "6":
+                    Console.Write("Priority (Low/Medium/High): ");
+                    TaskPriority fp =
+                        Enum.Parse<TaskPriority>(Console.ReadLine(), true);
+
+                    manager.FilterByPriority(fp);
+                    break;
+                case "7":
+                    manager.SaveFiles();
+                    break;
+
+                case "8":
+                    return;
             }
         }
     }
-
 }
