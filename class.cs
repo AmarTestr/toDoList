@@ -81,11 +81,28 @@ namespace TaskManagementSystem
     public class TaskManager
     {
         private List<TaskItem> tasks = new List<TaskItem>();
+        
+
         private string filePath = "C:\\Users\\amar0\\Documents\\jsonresponse.json";
+        
+        
+        public TaskManager()
+        {
+            if (File.Exists(filePath)) {
+                string json = File.ReadAllText(filePath);
+                tasks = JsonSerializer.Deserialize<List<TaskItem>>(json) ?? new List<TaskItem>();
+            }
+            else
+            {
+                tasks = new List<TaskItem>();
+            }
 
-
+        }
+        
+        
         public void AddTask(TaskItem task)
         {
+            
             bool exists = tasks.Any(t =>
                 t.Title.Equals(task.Title, StringComparison.OrdinalIgnoreCase));
 
@@ -103,6 +120,8 @@ namespace TaskManagementSystem
 
         public void ViewTasks()
         {
+            
+
             if (tasks.Count == 0)
             {
                 Console.WriteLine("\n----No tasks found----.");
@@ -123,12 +142,12 @@ namespace TaskManagementSystem
 
             if (task == null)
             {
-                Console.WriteLine("Task not found.");
+                Console.WriteLine("\nTask not found.");
                 return;
             }
 
             task.Status = TaskStatus.Completed;
-            Console.WriteLine("Task marked as completed.");
+            Console.WriteLine("\nTask marked as completed.");
         }
 
 
@@ -139,12 +158,12 @@ namespace TaskManagementSystem
 
             if (task == null)
             {
-                Console.WriteLine("Task not found.");
+                Console.WriteLine("\nTask not found.");
                 return;
             }
 
             tasks.Remove(task);
-            Console.WriteLine("Task deleted.");
+            Console.WriteLine("\nTask deleted.");
         }
 
 
@@ -167,7 +186,7 @@ namespace TaskManagementSystem
             });
             File.WriteAllText(filePath, json);
 
-            Console.WriteLine("Tasks saved to JSON file.");
+            Console.WriteLine("\nTasks saved to JSON file.");
         }
     }
 }

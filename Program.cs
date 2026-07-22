@@ -26,10 +26,10 @@ class Program
             switch (choice)
             {
                 case "1":
-                    Console.Write("Title: ");
+                    Console.WriteLine("Title: ");
                     string wtitle = Console.ReadLine();
 
-                    Console.Write("Priority (Low/Medium/High): ");
+                    Console.WriteLine("Priority (Low/Medium/High): ");
                     string workinput = Console.ReadLine();
                     if (Enum.TryParse<TaskPriority>(workinput, true, out TaskPriority wpriority) || !Enum.IsDefined(typeof(TaskPriority), wpriority))
                     {
@@ -40,7 +40,7 @@ class Program
                     {
                         Console.WriteLine("Outside the provided values");
                     }
-                    Console.Write("Work Project Name: ");
+                    Console.WriteLine("Work Project Name: ");
                     string project = Console.ReadLine();
 
                     manager.AddTask(
@@ -48,10 +48,10 @@ class Program
                     break;
 
                 case "2":
-                    Console.Write("Title: ");
+                    Console.WriteLine("Title: ");
                     string ptitle = Console.ReadLine();
 
-                    Console.Write("Priority (Low/Medium/High): ");
+                    Console.WriteLine("Priority (Low/Medium/High): ");
                     string personalinput = Console.ReadLine();
                     if (Enum.TryParse<TaskPriority>(personalinput, true, out TaskPriority ppriority) || !Enum.IsDefined(typeof(TaskPriority), ppriority))
                     {
@@ -63,7 +63,7 @@ class Program
                         Console.WriteLine("Outside the provided values");
                     }
 
-                    Console.Write("Personal Project Location: ");
+                    Console.WriteLine("Personal Project Location: ");
                     string location = Console.ReadLine();
 
                     manager.AddTask(
@@ -75,17 +75,17 @@ class Program
                     break;
 
                 case "4":
-                    Console.Write("Enter title: ");
+                    Console.WriteLine("Enter title: ");
                     manager.CompleteTask(Console.ReadLine());
                     break;
 
                 case "5":
-                    Console.Write("Enter title: ");
+                    Console.WriteLine("Enter title: ");
                     manager.DeleteTask(Console.ReadLine());
                     break;
 
                 case "6":
-                    Console.Write("Priority (Low/Medium/High): ");
+                    Console.WriteLine("Priority (Low/Medium/High): ");
                     TaskPriority fp =
                         Enum.Parse<TaskPriority>(Console.ReadLine(), true);
 
@@ -94,7 +94,6 @@ class Program
                 case "7":
                     manager.SaveFiles();
                     break;
-
                 case "8":
                     return;
             }
